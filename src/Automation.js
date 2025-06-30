@@ -20,6 +20,7 @@ class Automation
     static Shop = AutomationShop;
     static Trivia = AutomationTrivia;
     static Underground = AutomationUnderground;
+    static UndergroundF = AutomationUndergroundFast;
     static Utils = AutomationUtils;
 
     static InitSteps = class AutomationInitSteps

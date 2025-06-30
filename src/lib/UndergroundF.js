@@ -25,7 +25,7 @@ class AutomationUndergroundFast
         else
         {
             // Restore previous session state
-            this.toggleAutoMining();
+            this.toggleAutoMiningF();
         }
     }
 
@@ -38,7 +38,7 @@ class AutomationUndergroundFast
      * @param enable: [Optional] If a boolean is passed, it will be used to set the right state.
      *                Otherwise, the local storage value will be used
      */
-    static toggleAutoMining(enable)
+    static toggleAutoMiningF(enable)
     {
         if (!App.game.underground.canAccess())
         {
@@ -62,18 +62,18 @@ class AutomationUndergroundFast
             }
 
             // Only set a loop if there is none active
-            if (this.__internal__autoMiningLoop === null)
+            if (this.__internal__autoMiningFLoop === null)
             {
                 // Set auto-mine loop
-                this.__internal__autoMiningLoop = setInterval(this.__internal__miningLoop.bind(this), 10000); // Runs every 10 seconds
-                this.__internal__miningLoop();
+                this.__internal__autoMiningFLoop = setInterval(this.__internal__miningFLoop.bind(this), 10000); // Runs every 10 seconds
+                this.__internal__miningFLoop();
             }
         }
         else
         {
             // Unregister the loops
-            clearInterval(this.__internal__autoMiningLoop);
-            this.__internal__autoMiningLoop = null;
+            clearInterval(this.__internal__autoMiningFLoop);
+            this.__internal__autoMiningFLoop = null;
         }
     }
 
@@ -83,8 +83,8 @@ class AutomationUndergroundFast
 
     static __internal__undergroundFContainer = null;
 
-    static __internal__autoMiningLoop = null;
-    static __internal__innerMiningLoop = null;
+    static __internal__autoMiningFLoop = null;
+    static __internal__innerMiningFLoop = null;
 
     static __internal__actionCount = 0;
     static __internal__canUseHammer = false;
@@ -108,15 +108,15 @@ class AutomationUndergroundFast
             this.__internal__setUndergroundUnlockWatcher();
         }
 
-        const autoMiningTooltip = "Underground Fast Mining"
+        const autoMiningFTooltip = "Underground Fast Mining"
                                 + Automation.Menu.TooltipSeparator
                                 + "Basically the same as regular mining except\n"
                                 + "this goes WAY faster than normal.\n"
                                 + "Please use this responsibly.";
 
-        const miningButton =
-            Automation.Menu.addAutomationButton("Fast Mining", this.Settings.FeatureEnabled, autoMiningTooltip, this.__internal__undergroundFContainer);
-        miningButton.addEventListener("click", this.toggleAutoMining.bind(this), false);
+        const miningFButton =
+            Automation.Menu.addAutomationButton("Fast Mining", this.Settings.FeatureEnabled, autoMiningFTooltip, this.__internal__undergroundFContainer);
+        miningFButton.addEventListener("click", this.toggleAutoMiningF.bind(this), false);
     }
 
     /**
@@ -131,7 +131,7 @@ class AutomationUndergroundFast
             {
                 clearInterval(watcher);
                 this.__internal__undergroundFContainer.hidden = false;
-                this.toggleAutoMining();
+                this.toggleAutoMiningF();
             }
         }.bind(this), 10000); // Check every 10 seconds
     }
@@ -141,21 +141,21 @@ class AutomationUndergroundFast
      *
      * It will try to run the mining inner loop if it's not already active
      */
-    static __internal__miningLoop()
+    static __internal__miningFLoop()
     {
         // Don't run an additionnal loop if another one is already in progress
         // Or the user launched a mine discovery
-        if ((this.__internal__innerMiningLoop !== null)
+        if ((this.__internal__innerMiningFLoop !== null)
             || (App.game.underground.mine.timeUntilDiscovery > 0))
         {
             return;
         }
 
         this.__internal__actionCount = 0;
-        this.__internal__innerMiningLoop = setInterval(function()
+        this.__internal__innerMiningFLoop = setInterval(function()
             {
                 // Stop the loop if the main feature loop was stopped, or no action was possible
-                if ((this.__internal__autoMiningLoop == null)
+                if ((this.__internal__autoMiningFLoop == null)
                     || !this.__internal__tryUseOneMiningItem())
                 {
                     // Only notify the user if at least one action occured
@@ -164,8 +164,8 @@ class AutomationUndergroundFast
                         Automation.Notifications.sendNotif(`Performed mining actions ${this.__internal__actionCount.toString()} times!`,
                                                            "Mining");
                     }
-                    clearInterval(this.__internal__innerMiningLoop);
-                    this.__internal__innerMiningLoop = null;
+                    clearInterval(this.__internal__innerMiningFLoop);
+                    this.__internal__innerMiningFLoop = null;
                 }
             }.bind(this), 10); // Runs every 0.01s
     }

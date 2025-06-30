@@ -81,7 +81,7 @@ class AutomationUnderground
     |***    Internal members, should never be used by other classes    ***|
     \*********************************************************************/
 
-    static __internal__undergroundContainer = null;
+    static __internal__undergroundFContainer = null;
 
     static __internal__autoMiningLoop = null;
     static __internal__innerMiningLoop = null;
@@ -96,15 +96,15 @@ class AutomationUnderground
     static __internal__buildMenu()
     {
         // Add the related button to the automation menu
-        this.__internal__undergroundContainer = document.createElement("div");
-        Automation.Menu.AutomationButtonsDiv.appendChild(this.__internal__undergroundContainer);
+        this.__internal__undergroundFContainer = document.createElement("div");
+        Automation.Menu.AutomationButtonsDiv.appendChild(this.__internal__undergroundFContainer);
 
-        Automation.Menu.addSeparator(this.__internal__undergroundContainer);
+        Automation.Menu.addSeparator(this.__internal__undergroundFContainer);
 
         // Only display the menu when the underground is unlocked
         if (!App.game.underground.canAccess())
         {
-            this.__internal__undergroundContainer.hidden = true;
+            this.__internal__undergroundFContainer.hidden = true;
             this.__internal__setUndergroundUnlockWatcher();
         }
 
@@ -115,7 +115,7 @@ class AutomationUnderground
                                 + "Please use this responsibly.";
 
         const miningButton =
-            Automation.Menu.addAutomationButton("Fast Mining", this.Settings.FeatureEnabled, autoMiningTooltip, this.__internal__undergroundContainer);
+            Automation.Menu.addAutomationButton("Fast Mining", this.Settings.FeatureEnabled, autoMiningTooltip, this.__internal__undergroundFContainer);
         miningButton.addEventListener("click", this.toggleAutoMining.bind(this), false);
     }
 
@@ -130,7 +130,7 @@ class AutomationUnderground
             if (App.game.underground.canAccess())
             {
                 clearInterval(watcher);
-                this.__internal__undergroundContainer.hidden = false;
+                this.__internal__undergroundFContainer.hidden = false;
                 this.toggleAutoMining();
             }
         }.bind(this), 10000); // Check every 10 seconds

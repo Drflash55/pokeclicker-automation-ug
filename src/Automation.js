@@ -69,6 +69,7 @@ class Automation
                     this.Focus.initialize(initStep);
                     this.Hatchery.initialize(initStep);
                     this.Underground.initialize(initStep);
+                    this.UndergroundF.initialize(initStep);
                     this.Farm.initialize(initStep);
                     this.Shop.initialize(initStep);
                     this.Items.initialize(initStep);

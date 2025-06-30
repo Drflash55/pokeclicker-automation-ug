@@ -1,10 +1,10 @@
 /**
- * @class The AutomationUnderground regroups the 'Mining' functionalities
+ * @class The AutomationUndergroundFast regroups the 'Mining' functionalities
  *
  * @note The underground is not accessible right away when starting a new game.
  *       This menu will be hidden until the functionality is unlocked in-game.
  */
-class AutomationUnderground
+class AutomationUndergroundFast
 {
     static Settings = {
                           FeatureEnabled: "MiningF-Enabled"

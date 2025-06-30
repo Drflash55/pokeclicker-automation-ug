@@ -1,4 +1,8 @@
-## Pokeclicker-automation
+### Pokeclicker-automation (CUSTOM)
+This is my custom version of Farigh's Pokeclicker script in order to test some things. This won't aim to replace his at all.
+
+#
+ORIGINAL DESCRIPTION:
 
 Pokeclicker-automation aims at automating some recurring tasks that can be a bit tedious for the web-based game https://www.pokeclicker.com/
 

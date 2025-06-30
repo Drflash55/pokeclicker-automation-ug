@@ -7,7 +7,7 @@
 class AutomationUnderground
 {
     static Settings = {
-                          FeatureEnabled: "Mining-Enabled"
+                          FeatureEnabled: "MiningF-Enabled"
                       };
 
     /**
@@ -108,18 +108,14 @@ class AutomationUnderground
             this.__internal__setUndergroundUnlockWatcher();
         }
 
-        const autoMiningTooltip = "Automatically mine in the Underground"
+        const autoMiningTooltip = "Underground Fast Mining"
                                 + Automation.Menu.TooltipSeparator
-                                + "Survey will be used as soon as available, unless all items were already found\n"
-                                + "If equipped, the battery discharge will be used as soon as charged\n"
-                                + "Bombs will be used as soon as available, unless all items were already found\n"
-                                + "If the bomb's durability is maxed-out, it will be used regardless,\n"
-                                + "unless the tool reached infinite use\n"
-                                + "Then it tries to use the best possible tool to complete a partially found item\n"
-                                + "or find a hidden one";
+                                + "Basically the same as regular mining except\n"
+                                + "this goes WAY faster than normal.\n"
+                                + "Please use this responsibly.";
 
         const miningButton =
-            Automation.Menu.addAutomationButton("Mining", this.Settings.FeatureEnabled, autoMiningTooltip, this.__internal__undergroundContainer);
+            Automation.Menu.addAutomationButton("Fast Mining", this.Settings.FeatureEnabled, autoMiningTooltip, this.__internal__undergroundContainer);
         miningButton.addEventListener("click", this.toggleAutoMining.bind(this), false);
     }
 
@@ -171,8 +167,7 @@ class AutomationUnderground
                     clearInterval(this.__internal__innerMiningLoop);
                     this.__internal__innerMiningLoop = null;
                 }
-            }.bind(this), 100); // Runs every 0.10s - Running tests to see if the script can handle faster loop inputs
-            // (0.05s should be fast enough, anything below is too much)
+            }.bind(this), 10); // Runs every 0.01s
     }
 
     /**

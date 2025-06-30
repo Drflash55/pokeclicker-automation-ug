@@ -171,7 +171,7 @@ class AutomationUnderground
                     clearInterval(this.__internal__innerMiningLoop);
                     this.__internal__innerMiningLoop = null;
                 }
-            }.bind(this), 300); // Runs every 0.3s
+            }.bind(this), 100); // Runs every 0.1s - Running a test to see if the script can handle faster inputs
     }
 
     /**
